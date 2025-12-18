@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-primary-main: #0284c7;
+  --color-primary-light: #38bdf8;
+  --color-primary-dark: #0369a1;
+
+  --color-secondary-main: #0f766e;
+  --color-secondary-light: #14b8a6;
+  --color-secondary-dark: #0f5132;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg-color: #F3F4F6;
+  --text-color: #111827;
+  --card-bg: #ffffff;
+  --border-color: #e5e7eb;
+}
+
+.dark {
+  --bg-color: #111827; /* Gray 900 */
+  --text-color: #f9fafb; /* Gray 50 */
+  --card-bg: #1f2937; /* Gray 800 */
+  --border-color: #374151; /* Gray 700 */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary {
+  @apply bg-sky-600 text-white px-4 py-2 rounded hover:bg-sky-700 transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-colors;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+}

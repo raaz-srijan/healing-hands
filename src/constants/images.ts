@@ -1,0 +1,11 @@
+export { default as consultantImg1 } from "../assets/images/consultant1.png"
+export { default as consultantImg2 } from "../assets/images/consultant3.png";
+export { default as consultantImg3 } from "../assets/images/consultant2.png";
+export { default as consultantImg4 } from "../assets/images/consultant4.jpg";
+export { default as cardiologyImg } from "../assets/images/Cardiology.jpg";
+export { default as emergencyImg } from "../assets/images/Emergency.jpg";
+export { default as maternityImg } from "../assets/images/Maternity.jpg";
+export { default as orthopedicsImg } from "../assets/images/Orthopedics.jpg";
+export { default as pediatricsImg } from "../assets/images/Pediatrics.jpg";
+export { default as radiologyImg } from "../assets/images/Radiology.jpg";
+export { default as surgeryImg } from "../assets/images/Surgery.jpg";
