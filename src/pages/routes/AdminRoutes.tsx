@@ -8,6 +8,7 @@ import ManagePatients from '../dashboard/admin/ManagePatients';
 import RoleManagement from '../dashboard/admin/RoleManagement';
 import ManageChatbot from '../dashboard/admin/ManageChatbot';
 import SidebarLayout from '../../components/dashboard/SidebarLayout';
+import ManageHire from '../dashboard/admin/ManageHire';
 
 const AdminRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AdminRoutes = () => {
       <Route path="roles" element={<SidebarLayout><RoleManagement /></SidebarLayout>} />
       <Route path="chatbot" element={<SidebarLayout><ManageChatbot /></SidebarLayout>} />
       <Route path="faqs" element={<SidebarLayout><ManageChatbot /></SidebarLayout>} />
+      <Route path="hire" element={<SidebarLayout><ManageHire /></SidebarLayout>} />
     </Routes>
   );
 };

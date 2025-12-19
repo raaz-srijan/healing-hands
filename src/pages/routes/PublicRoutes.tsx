@@ -10,6 +10,9 @@ import Careers from '../public/Careers';
 import Patients from '../public/Patients';
 import News from '../public/News';
 import NotFound from '../NotFound';
+import PrivacyPolicy from '../public/Privacy';
+import TermsOfUse from '../public/Terms';
+import Accessibility from '../public/Accessibility';
 
 const PublicRoutes = () => {
     return (
@@ -24,6 +27,9 @@ const PublicRoutes = () => {
                 <Route path="careers" element={<Careers />} />
                 <Route path="patients" element={<Patients />} />
                 <Route path="news" element={<News />} />
+                <Route path="privacy" element={<PrivacyPolicy />} />
+                <Route path="terms" element={<TermsOfUse />} />
+                <Route path="accessibility" element={<Accessibility />} />
                 
                 <Route path="records" element={<Patients />} />
                 <Route path="appointments" element={<Contact />} /> 

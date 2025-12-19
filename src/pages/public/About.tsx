@@ -1,4 +1,5 @@
 import { FaCheckCircle, FaHospital, FaUsers, FaAward } from 'react-icons/fa';
+import ProfessionalSlider from '../../components/homepage/Slider';
 
 const About = () => {
     return (
@@ -24,11 +25,7 @@ const About = () => {
                         </p>
                     </div>
                     <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-                         <img 
-                            src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2906&auto=format&fit=crop" 
-                            alt="Medical Team" 
-                            className="absolute inset-0 w-full h-full object-cover"
-                         />
+                         <ProfessionalSlider/>
                     </div>
                 </div>
             </section>
