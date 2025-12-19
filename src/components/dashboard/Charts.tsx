@@ -50,7 +50,6 @@ export const AppointmentsChart = ({ data: appointmentData }: AppointmentsChartPr
     return () => observer.disconnect();
   }, []);
 
-  // Default structure if no data
   const labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const values = labels.map(day => appointmentData ? appointmentData[day] || 0 : 0);
 

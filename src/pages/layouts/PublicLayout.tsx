@@ -2,6 +2,7 @@
 import { Outlet } from 'react-router-dom';
 import Footer from '../../components/footer/Footer';
 import Navbar from '../../components/navbar/Navbar';
+import ChatbotButton from '../../components/chatbot/ChatbotButton';
 
 const PublicLayout = () => {
 
@@ -12,6 +13,8 @@ const PublicLayout = () => {
         <Outlet />
       </main>
       <Footer/>
+      
+      <ChatbotButton />
     </div>
   );
 };

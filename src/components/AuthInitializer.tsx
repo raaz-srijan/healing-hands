@@ -29,7 +29,7 @@ const AuthInitializer = ({ children }: AuthInitializerProps) => {
                 });
 
                 if (res.data.success && res.data.user) {
-                    dispatch(login(res.data.user));
+                    dispatch(login({ ...res.data.user, token }));
                 } else {
                     dispatch(logout());
                     localStorage.removeItem('token');

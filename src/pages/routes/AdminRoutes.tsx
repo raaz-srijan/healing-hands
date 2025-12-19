@@ -6,6 +6,7 @@ import ManageNurses from '../dashboard/admin/ManageNurses';
 import ManageReceptionists from '../dashboard/admin/ManageReceptionists';
 import ManagePatients from '../dashboard/admin/ManagePatients';
 import RoleManagement from '../dashboard/admin/RoleManagement';
+import ManageChatbot from '../dashboard/admin/ManageChatbot';
 import SidebarLayout from '../../components/dashboard/SidebarLayout';
 
 const AdminRoutes = () => {
@@ -18,8 +19,11 @@ const AdminRoutes = () => {
       <Route path="receptionists" element={<SidebarLayout><ManageReceptionists /></SidebarLayout>} />
       <Route path="patients" element={<SidebarLayout><ManagePatients /></SidebarLayout>} />
       <Route path="roles" element={<SidebarLayout><RoleManagement /></SidebarLayout>} />
+      <Route path="chatbot" element={<SidebarLayout><ManageChatbot /></SidebarLayout>} />
+      <Route path="faqs" element={<SidebarLayout><ManageChatbot /></SidebarLayout>} />
     </Routes>
   );
 };
 
 export default AdminRoutes;
+

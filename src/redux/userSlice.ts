@@ -7,8 +7,9 @@ interface UserState {
     phone: string;
     isVerified: boolean;
     role: string | null;
-    profile: any;  
+    profile: any;
     profileModel: any;
+    token: string | null;
 }
 
 const initialState: UserState = {
@@ -20,6 +21,7 @@ const initialState: UserState = {
     role: null,
     profile: null,
     profileModel: null,
+    token: null,
 };
 
 const userSlice = createSlice({
@@ -37,6 +39,7 @@ const userSlice = createSlice({
             
             state.profile = action.payload.profile;
             state.profileModel = action.payload.profileModel;
+            state.token = action.payload.token;
         },
 
         logout() {

@@ -66,7 +66,6 @@ const ManageNurses = () => {
     }
   };
 
-  // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 7;
 
@@ -75,14 +74,12 @@ const ManageNurses = () => {
     n.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
   
-  // Apply Pagination
   const totalPages = Math.ceil(filteredNurses.length / itemsPerPage);
   const displayedNurses = filteredNurses.slice(
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage
   );
 
-  // Reset page on search change
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm]);
@@ -185,7 +182,7 @@ const ManageNurses = () => {
                                 <td className="px-6 py-4 text-right space-x-2">
                                      <button 
                                         onClick={() => handleDeleteClick(nurse._id)}
-                                        className="text-gray-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 p-2 rounded-lg transition-all transform hover:scale-105" 
+                                        className="text-gray-400 cursor-pointer dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 p-2 rounded-lg transition-all transform hover:scale-105" 
                                         title="Delete Nurse"
                                     >
                                         <FaTrash size={14} />

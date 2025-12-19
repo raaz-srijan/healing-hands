@@ -16,14 +16,14 @@ interface User {
   name: string;
   email: string;
   phone: string;
-  role: Role | string; // Could be populated object or ID string
+  role: Role | string;
   isVerified: boolean;
 }
 
 const UserManagement = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
-  const [selectedRole, setSelectedRole] = useState<string>("All"); // Filter state
+  const [selectedRole, setSelectedRole] = useState<string>("All"); 
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -131,9 +131,6 @@ const UserManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 7;
 
-  // Filter Logic:
-  // 1. Search by name or email
-  // 2. Filter by Role (if not "All")
   const filteredUsers = users.filter(user => {
       const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                             user.email.toLowerCase().includes(searchTerm.toLowerCase());
@@ -144,7 +141,6 @@ const UserManagement = () => {
       return matchesSearch && matchesRole;
   });
   
-  // Apply Pagination to Filtered Results
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
   const displayedUsers = filteredUsers.slice(
       (currentPage - 1) * itemsPerPage,
@@ -177,11 +173,11 @@ const UserManagement = () => {
                     <select
                         value={selectedRole}
                         onChange={(e) => setSelectedRole(e.target.value)}
-                        className="pl-9 pr-10 py-2 border border-gray-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 dark:focus:border-sky-500 transition-all text-sm bg-white dark:bg-slate-800 text-gray-700 dark:text-slate-200 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 bg-no-repeat bg-right"
+                        className="capitalize pl-9 pr-10 py-2 border border-gray-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 dark:focus:border-sky-500 transition-all text-sm bg-white dark:bg-slate-800 text-gray-700 dark:text-slate-200 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 bg-no-repeat bg-right"
                     >
                         <option value="All">All Roles</option>
                         {roles.map(role => (
-                            <option key={role._id} value={role.name}>
+                            <option className="capitalize" key={role._id} value={role.name}>
                                 {role.name}
                             </option>
                         ))}
@@ -233,10 +229,10 @@ const UserManagement = () => {
                                      <select
                                         value={typeof user.role === 'object' ? user.role._id : ''}
                                         onChange={(e) => handleRoleChange(user._id, e.target.value, user.name)}
-                                        className="block w-full max-w-[140px] px-2 py-1.5 text-xs rounded-md border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-700 dark:text-slate-200 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+                                        className="block w-full capitalize max-w-[140px] px-2 py-1.5 text-xs rounded-md border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-700 dark:text-slate-200 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
                                      >
                                          {roles.map(role => (
-                                             <option key={role._id} value={role._id}>
+                                             <option className="capitalize" key={role._id} value={role._id}>
                                                  {role.name}
                                              </option>
                                          ))}
@@ -245,7 +241,7 @@ const UserManagement = () => {
                                 <td className="px-6 py-4 text-right space-x-2">
                                      <button 
                                         onClick={() => handleDeleteClick(user._id)}
-                                        className="text-gray-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1" 
+                                        className="cursor-pointer text-gray-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1" 
                                         title="Delete User"
                                     >
                                         <FaTrash />

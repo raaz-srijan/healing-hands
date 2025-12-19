@@ -99,7 +99,7 @@ const RoleManagement = () => {
           const payload = {
               name: roleFormData.name,
               permissions: roleFormData.selectedPermissionIds,
-              profileModel: 'PatientProfile' // Hardcoded default for now
+              profileModel: 'PatientProfile' 
           };
 
           if (roleModalMode === 'create') {
@@ -139,7 +139,6 @@ const RoleManagement = () => {
       currentRolePage * rolesPerPage
   );
 
-  // --- Permission Handlers ---
 
   const handleCreatePermissionClick = () => {
       setPermissionFormData({ name: '', group: '' });
@@ -200,7 +199,7 @@ const RoleManagement = () => {
         <div className="flex border-b border-gray-100 dark:border-slate-800">
              <button
                 onClick={() => setActiveTab('roles')}
-                className={`flex-1 py-4 text-center font-medium text-sm border-b-2 transition-colors flex items-center justify-center gap-2 ${
+                className={`flex-1 py-4 text-center cursor-pointer font-medium text-sm border-b-2 transition-colors flex items-center justify-center gap-2 ${
                     activeTab === 'roles' ? 'border-sky-600 text-sky-600 dark:text-sky-500 bg-sky-50/50 dark:bg-sky-900/20' : 'border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800/50'
                 }`}
              >
@@ -208,7 +207,7 @@ const RoleManagement = () => {
              </button>
              <button
                 onClick={() => setActiveTab('permissions')}
-                className={`flex-1 py-4 text-center font-medium text-sm border-b-2 transition-colors flex items-center justify-center gap-2 ${
+                className={`cursor-pointer flex-1 py-4 text-center font-medium text-sm border-b-2 transition-colors flex items-center justify-center gap-2 ${
                     activeTab === 'permissions' ? 'border-sky-600 text-sky-600 dark:text-sky-500 bg-sky-50/50 dark:bg-sky-900/20' : 'border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800/50'
                 }`}
              >
@@ -249,8 +248,8 @@ const RoleManagement = () => {
                                                 <FaUserShield className="text-sky-600 dark:text-sky-500 text-xl" />
                                             </div>
                                             <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button onClick={() => handleEditRoleClick(role)} className="text-gray-400 dark:text-slate-500 hover:text-sky-600 dark:hover:text-sky-400 p-1"><FaEdit /></button>
-                                                <button onClick={() => { setDeleteType('role'); setDeleteId(role._id); setIsDeleteModalOpen(true); }} className="text-gray-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 p-1"><FaTrash /></button>
+                                                <button onClick={() => handleEditRoleClick(role)} className="text-gray-400 dark:text-slate-500 hover:text-sky-600 cursor-pointer dark:hover:text-sky-400 p-1"><FaEdit /></button>
+                                                <button onClick={() => { setDeleteType('role'); setDeleteId(role._id); setIsDeleteModalOpen(true); }} className="text-gray-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 p-1 cursor-pointer"><FaTrash /></button>
                                             </div>
                                         </div>
                                         <h3 className="text-lg font-bold text-gray-800 dark:text-slate-100 capitalize mb-1">{role.name}</h3>
@@ -292,7 +291,7 @@ const RoleManagement = () => {
                                                 <div className="text-sm font-medium text-gray-600 dark:text-slate-300">{perm.name}</div>
                                                 <button 
                                                     onClick={() => { setDeleteType('permission'); setDeleteId(perm._id); setIsDeleteModalOpen(true); }}
-                                                    className="text-gray-300 dark:text-slate-600 hover:text-red-500 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                                                    className="text-gray-300 dark:text-slate-600 hover:text-red-500 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                                                 >
                                                     <FaTrash size={12} />
                                                 </button>

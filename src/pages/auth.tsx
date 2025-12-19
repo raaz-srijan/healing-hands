@@ -35,11 +35,64 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
 
   const [loading, setLoading] = useState(false);
 
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [loginData, setLoginData] = useState<{ email: string; hash: string; phone: string } | null>(null);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleVerifyOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!otp) return;
+    setLoading(true);
+
+    try {
+        const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/login/verify-otp`, {
+            email: loginData?.email,
+            hash: loginData?.hash,
+            phone: loginData?.phone,
+            otp
+        });
+
+        localStorage.setItem("token", res.data.token);
+        dispatch(login({ ...res.data.user, token: res.data.token }));
+        toast.success("Login successful");
+        
+        const role = res.data.user.role?.name || res.data.user.role;
+        const roleName = typeof role === 'string' ? role : role?.name;
+
+        switch(roleName?.toLowerCase()) {
+            case 'admin':
+                navigate("/dashboard/admin");
+                break;
+            case 'doctor':
+                navigate("/dashboard/doctor");
+                break;
+            case 'nurse':
+                navigate("/dashboard/nurse");
+                break;
+            case 'receptionist':
+                navigate("/dashboard/receptionist");
+                break;
+            case 'patient':
+                navigate("/dashboard/patient");
+                break;
+            default:
+                console.warn("Unrecognized role:", roleName);
+                navigate("/");
+        }
+    } catch (error) {
+        const err = error as AxiosError<{ message: string }>;
+        console.error(error);
+        toast.error(err.response?.data?.message || err.message || "Invalid OTP");
+    } finally {
+        setLoading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -75,33 +128,30 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
       );
 
       if (type === "login") {
-        localStorage.setItem("token", res.data.token);
-        dispatch(login(res.data.user));
-        toast.success("Login successful");
-        
-        const role = res.data.user.role?.name || res.data.user.role;
-        const roleName = typeof role === 'string' ? role : role?.name;
-        console.log('Login Role Debug:', roleName);
-
-        switch(roleName?.toLowerCase()) {
-            case 'admin':
-                navigate("/dashboard/admin");
-                break;
-            case 'doctor':
-                navigate("/dashboard/doctor");
-                break;
-            case 'nurse':
-                navigate("/dashboard/nurse");
-                break;
-            case 'receptionist':
-                navigate("/dashboard/receptionist");
-                break;
-            case 'patient':
-                navigate("/dashboard/patient");
-                break;
-            default:
-                console.warn("Unrecognized role:", roleName);
-                navigate("/");
+        if (res.data.otpSent) {
+            setOtpSent(true);
+            setLoginData({ 
+                email: res.data.email, 
+                hash: res.data.hash,
+                phone: res.data.phone
+            });
+            toast.success(res.data.message);
+        } else {
+             // Fallback for direct login if OTP wasn't enabled/sent (legacy support)
+            localStorage.setItem("token", res.data.token);
+            dispatch(login({ ...res.data.user, token: res.data.token }));
+            toast.success("Login successful");
+             // ... navigate logic (copied from above/existing) ... 
+             const role = res.data.user.role?.name || res.data.user.role;
+             const roleName = typeof role === 'string' ? role : role?.name; // ...
+             switch(roleName?.toLowerCase()) {
+                 case 'admin': navigate("/dashboard/admin"); break;
+                 case 'doctor': navigate("/dashboard/doctor"); break;
+                 case 'nurse': navigate("/dashboard/nurse"); break;
+                 case 'receptionist': navigate("/dashboard/receptionist"); break;
+                 case 'patient': navigate("/dashboard/patient"); break;
+                 default: navigate("/");
+             }
         }
       } else {
         toast.success(res.data.message || "Registration successful. Please verify your email.");
@@ -160,7 +210,48 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
         </div>
 
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <form className="space-y-5" onSubmit={handleSubmit}>
+          {otpSent ? (
+               <form className="space-y-5" onSubmit={handleVerifyOtp}>
+                   <div className="relative">
+                     <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Enter OTP</label>
+                     <p className="text-xs text-gray-500 mb-3">We've sent a code to your email.</p>
+                     <div className="relative">
+                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                         <FaLock className="text-gray-400 dark:text-slate-500" />
+                       </div>
+                       <input
+                         name="otp"
+                         type="text"
+                         value={otp}
+                         onChange={(e) => setOtp(e.target.value)}
+                         required
+                         disabled={loading}
+                         className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400 transition-colors duration-200 outline-none"
+                         placeholder="123456"
+                       />
+                     </div>
+                   </div>
+
+                   <button
+                     type="submit"
+                     disabled={loading}
+                     className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-all duration-200 ${
+                       loading ? "opacity-75 cursor-not-allowed" : ""
+                     }`}
+                   >
+                     {loading ? "Verifying..." : "Verify OTP"}
+                   </button>
+                   
+                   <button
+                     type="button"
+                     onClick={() => setOtpSent(false)}
+                     className="w-full text-sm text-sky-600 hover:text-sky-500 dark:text-sky-400"
+                   >
+                     Back to Login
+                   </button>
+               </form>
+          ) : (
+           <form className="space-y-5" onSubmit={handleSubmit}>
             {type === "register" && (
               <div className="relative">
                 <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Full Name</label>
@@ -295,7 +386,8 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
             >
               {loading ? "Processing..." : (type === "login" ? "Sign In" : "Create Account")}
             </button>
-          </form>
+          </form> 
+          )}
 
           <div className="mt-6">
             <div className="relative">

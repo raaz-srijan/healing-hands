@@ -56,13 +56,11 @@ const AdminDashboard = () => {
           <p className="text-gray-500 dark:text-slate-400 mt-1">Monitor hospital performance and statistics.</p>
         </div>
 
-        {/* Widgets Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard 
             title="Total Patients" 
             value={loading ? "..." : stats.patients.toString()} 
             icon={<FaUsers />} 
-            trend="+12% from last month" 
             trendUp={true} 
             color="bg-sky-500"
           />
@@ -70,7 +68,6 @@ const AdminDashboard = () => {
             title="Medical Staff" 
             value={loading ? "..." : stats.medicalStaff.toString()} 
             icon={<FaUserMd />} 
-            trend="Doctors, Nurses & Support" 
             trendUp={true} 
             color="bg-purple-500"
           />
@@ -78,7 +75,6 @@ const AdminDashboard = () => {
             title="Today's Appointments" 
             value={loading ? "..." : stats.appointments.toString()} 
             icon={<FaCalendarCheck />} 
-            trend="5 Pending Confirmation" 
             trendUp={true} 
             color="bg-emerald-500"
           />
@@ -86,7 +82,6 @@ const AdminDashboard = () => {
             title="Active Admissions" 
             value={loading ? "..." : stats.admissions.toString()} 
             icon={<FaProcedures />} 
-            trend="8 Discharges pending" 
             trendUp={false} 
             color="bg-orange-500"
           />

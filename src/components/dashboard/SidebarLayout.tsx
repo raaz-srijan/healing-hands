@@ -18,7 +18,8 @@ import {
   FaStethoscope,
   FaFileMedical,
   FaSun,
-  FaMoon
+  FaMoon,
+  FaQuestionCircle
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useDarkMode } from "../../context/DarkModeContext";
@@ -79,6 +80,7 @@ const SidebarLayout = ({ children }: SidebarProps) => {
     { name: "Nurses", path: "/dashboard/admin/nurses", icon: <FaUserNurse /> },
     { name: "Receptionists", path: "/dashboard/admin/receptionists", icon: <FaConciergeBell /> },
     { name: "Patients", path: "/dashboard/admin/patients", icon: <FaUserInjured /> },
+    {name: "FAQs", path: "/dashboard/admin/faqs", icon:<FaQuestionCircle /> },
     { name: "User Management", path: "/dashboard/admin/users", icon: <FaUsersCog /> },
     { name: "Roles & Permissions", path: "/dashboard/admin/roles", icon: <FaLock /> },
   ];

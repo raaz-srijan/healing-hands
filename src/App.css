@@ -35,11 +35,11 @@ body {
 }
 
 .btn-primary {
-  @apply bg-sky-600 text-white px-4 py-2 rounded hover:bg-sky-700 transition-colors;
+  @apply cursor-pointer bg-sky-600 text-white px-4 py-2 rounded hover:bg-sky-700 transition-colors;
 }
 
 .btn-secondary {
-  @apply bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-colors;
+  @apply cursor-pointer bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-colors;
 }
 
 /* Animations */

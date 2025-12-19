@@ -192,7 +192,7 @@ const ManageDoctors = () => {
                                 <td className="px-6 py-4 text-right space-x-2">
                                      <button 
                                         onClick={() => handleDeleteClick(doctor._id)}
-                                        className="text-gray-400 hover:text-red-600 dark:text-slate-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 p-2 rounded-lg transition-all transform hover:scale-105" 
+                                        className="text-gray-400 cursor-pointer hover:text-red-600 dark:text-slate-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 p-2 rounded-lg transition-all transform hover:scale-105" 
                                         title="Delete Doctor"
                                     >
                                         <FaTrash size={14} />
