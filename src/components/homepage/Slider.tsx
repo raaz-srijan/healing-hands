@@ -1,120 +1,119 @@
-'use client';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { consultantImg1, hosp1, hosp2, surgeryImg } from "../../constants/images";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-import { Box, Container, Typography, Button, Stack, Fade } from '@mui/material';
-import { FaCalendarAlt, FaUserMd } from 'react-icons/fa';
-import { useRouter } from 'next/navigation';
+const CustomArrow = ({ className, style, onClick, direction }: any) => {
+  return (
+    <div
+      className={`${className} !flex items-center justify-center z-10 w-10 h-10 md:w-12 md:h-12 rounded-full cursor-pointer
+        bg-black/20 hover:bg-black/40 backdrop-blur-sm border border-white/10 shadow-lg 
+        transition-all duration-300 transform hover:scale-110 !text-white`}
+      style={{ 
+        ...style, 
+        [direction === "left" ? "left" : "right"]: "20px",
+        display: "flex",
+        opacity: 1 
+      }}
+      onClick={onClick}
+    >
+        {direction === "left" ? (
+             <FaChevronLeft className="text-white text-base md:text-lg drop-shadow-md"/>
+        ) : (
+             <FaChevronRight className="text-white text-base md:text-lg drop-shadow-md"/>
+        )}
+    </div>
+  );
+};
 
-export default function Slider() {
-  const router = useRouter();
+const slides = [
+    { 
+        img: hosp1, 
+        title: "World-Class Facilities", 
+        subtitle: "Experience healthcare reimagined in our state-of-the-art environment designed for your comfort and healing." 
+    },
+    { 
+        img: surgeryImg, 
+        title: "Advanced Surgical Care", 
+        subtitle: "Precision and safety driven by our expert surgical teams and cutting-edge robotic technology." 
+    },
+    { 
+        img: consultantImg1, 
+        title: "Expert Consultants", 
+        subtitle: "Connect with internationally renowned specialists dedicated to your personalized treatment plan." 
+    },
+    { 
+        img: hosp2, 
+        title: "Compassionate Nursing", 
+        subtitle: "Round-the-clock care provided by our empathetic and highly skilled nursing professionals." 
+    },
+];
+
+function ProfessionalSlider() {
+  const settings = {
+    dots: false,
+    fade: true,
+    infinite: true,
+    speed: 1000,
+    autoplay: true,
+    autoplaySpeed: 6000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    pauseOnHover: false,
+    waitForAnimate: false,
+    arrows:false,
+    customPaging: () => (
+        <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/30 hover:bg-white/80 transition-all duration-300 cursor-pointer shadow-sm backdrop-blur-sm ring-1 ring-white/10"></div>
+    )
+  };
 
   return (
-    <Box
-      sx={{
-        position: 'relative',
-        bgcolor: 'primary.main', 
-        background: 'linear-gradient(135deg, #1565C0 0%, #00695C 100%)',
-        color: 'white',
-        pt: { xs: 8, md: 16 },
-        pb: { xs: 8, md: 16 },
-        overflow: 'hidden',
-      }}
-    >
-      {/* Background Pattern */}
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          opacity: 0.1,
-          backgroundImage: 'radial-gradient(circle at 20% 50%, white 0%, transparent 20%), radial-gradient(circle at 80% 20%, white 0%, transparent 20%)',
-          backgroundSize: '80% 80%',
-        }}
-      />
+    <div className="slider-container rounded-3xl overflow-hidden shadow-2xl relative group bg-slate-900 h-full">
+      <Slider {...settings}>
+        {slides.map((slide, index) => (
+            <div key={index} className="outline-none relative h-full">
+                <div className="relative h-[450px] md:h-[550px] w-full overflow-hidden">
+                    {/* Dark Gradient Overlay for readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent z-10 pointer-events-none"></div>
+                    
+                    {/* Image with Ken Burns Effect */}
+                    <img 
+                        src={slide.img} 
+                        alt={slide.title} 
+                        className="w-full h-full object-cover animate-subtle-zoom"
+                        style={{
+                            animation: `kenBurns 20s infinite alternate`
+                        }}
+                    />
 
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-        <Stack spacing={4} maxWidth="md">
-            <Fade in timeout={1000}>
-            <Box>
-                <Typography
-                variant="h1"
-                sx={{
-                    fontWeight: 800,
-                    fontSize: { xs: '2.5rem', md: '4rem' },
-                    lineHeight: 1.1,
-                    mb: 2,
-                    textShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                }}
-                >
-                Advanced Healthcare <br />
-                <Box component="span" sx={{ color: '#80CBC4' }}>
-                    For Your Family
-                </Box>
-                </Typography>
-                
-                <Typography
-                variant="h5"
-                sx={{
-                    fontWeight: 400,
-                    opacity: 0.9,
-                    maxWidth: 600,
-                    lineHeight: 1.6,
-                    mb: 4,
-                }}
-                >
-                Experience world-class medical care with our team of specialized doctors
-                and state-of-the-art facilities. Your health is our priority.
-                </Typography>
+                     {/* Custom Keyframe for Ken Burns (inline for simplicity or use global CSS) */}
+                    <style>{`
+                        @keyframes kenBurns {
+                            0% { transform: scale(1); }
+                            100% { transform: scale(1.15); }
+                        }
+                    `}</style>
 
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <Button
-                    variant="contained"
-                    size="large"
-                    startIcon={<FaCalendarAlt />}
-                    onClick={() => router.push('/auth/login')}
-                    sx={{
-                    bgcolor: 'white',
-                    color: 'primary.main',
-                    px: 4,
-                    py: 1.5,
-                    fontSize: '1.1rem',
-                    fontWeight: 700,
-                    '&:hover': {
-                        bgcolor: '#f5f5f5',
-                        transform: 'translateY(-2px)',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-                    },
-                    transition: 'all 0.2s',
-                    }}
-                >
-                    Book Appointment
-                </Button>
-                <Button
-                    variant="outlined"
-                    size="large"
-                    startIcon={<FaUserMd />}
-                    onClick={() => router.push('/doctors')}
-                    sx={{
-                    borderColor: 'rgba(255,255,255,0.5)',
-                    color: 'white',
-                    px: 4,
-                    py: 1.5,
-                    fontSize: '1.1rem',
-                    fontWeight: 600,
-                    '&:hover': {
-                        borderColor: 'white',
-                        bgcolor: 'rgba(255,255,255,0.1)',
-                    },
-                    }}
-                >
-                    Find a Doctor
-                </Button>
-                </Stack>
-            </Box>
-            </Fade>
-        </Stack>
-      </Container>
-    </Box>
+
+                    {/* Content Overlay */}
+                    <div className="absolute bottom-0 left-0 w-full z-20 p-8 md:p-12 text-white/90">
+                        <div className="animate-fade-in-up">
+                            <h3 className="text-2xl md:text-4xl font-bold mb-3 tracking-tight text-white drop-shadow-lg">
+                                {slide.title}
+                            </h3>
+                            <div className="h-1 w-20 bg-sky-500 rounded-full mb-4 shadow-lg shadow-sky-500/30"></div>
+                            <p className="text-slate-200 text-base md:text-lg max-w-xl leading-relaxed font-light drop-shadow-md opacity-90">
+                                {slide.subtitle}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ))}
+      </Slider>
+    </div>
   );
 }
+
+export default ProfessionalSlider;

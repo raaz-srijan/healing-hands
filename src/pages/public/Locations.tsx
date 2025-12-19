@@ -1,4 +1,5 @@
 import { FaMapMarkerAlt, FaPhoneAlt, FaClock, FaDirections } from 'react-icons/fa';
+import { hosp1, hosp2 } from '../../constants/images';
 
 const Locations = () => {
     const locations = [
@@ -8,7 +9,7 @@ const Locations = () => {
             address: "123 Healing Way, Orlando, FL 32801",
             phone: "(407) 555-0101",
             hours: "24/7 Emergency | Mon-Fri 8am-8pm",
-            image: "https://images.unsplash.com/photo-1587351021759-3e566b9af923?q=80&w=1000&auto=format&fit=crop"
+            image: hosp1
         },
         {
             id: 2,
@@ -24,7 +25,7 @@ const Locations = () => {
             address: "789 South St, Kissimmee, FL 34741",
             phone: "(407) 555-0103",
             hours: "Mon-Fri 9am-5pm",
-            image: "https://images.unsplash.com/photo-1538108149393-fbbd8189718c?q=80&w=1000&auto=format&fit=crop"
+            image: hosp2
         }
     ];
 

@@ -3,7 +3,6 @@ import { FaCheckCircle, FaHospital, FaUsers, FaAward } from 'react-icons/fa';
 const About = () => {
     return (
         <div className="animate-fade-in-up">
-            {/* Page Header */}
             <section className="bg-sky-900 text-white chat-bg-gradient py-20">
                 <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
                     <h1 className="text-4xl md:text-5xl font-extrabold mb-4">About Us</h1>
@@ -11,7 +10,6 @@ const About = () => {
                 </div>
             </section>
 
-            {/* Mission & Vision */}
             <section className="py-20 bg-white dark:bg-gray-900">
                 <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div>

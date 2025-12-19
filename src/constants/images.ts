@@ -9,3 +9,5 @@ export { default as orthopedicsImg } from "../assets/images/Orthopedics.jpg";
 export { default as pediatricsImg } from "../assets/images/Pediatrics.jpg";
 export { default as radiologyImg } from "../assets/images/Radiology.jpg";
 export { default as surgeryImg } from "../assets/images/Surgery.jpg";
+export { default as hosp1 } from "../assets/images/hosp1.jpg";
+export { default as hosp2 } from "../assets/images/hosp2.jpg";

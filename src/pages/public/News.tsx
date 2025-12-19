@@ -1,4 +1,5 @@
-import { FaRegNewspaper, FaCalendarAlt } from 'react-icons/fa';
+import {  FaCalendarAlt } from 'react-icons/fa';
+import { cardiologyImg,  maternityImg, radiologyImg } from '../../constants/images';
 
 const News = () => {
     const newsItems = [
@@ -6,19 +7,19 @@ const News = () => {
             title: "Healing Care Ranked #1 in Patient Safety",
             date: "October 24, 2023",
             excerpt: "We are proud to announce that our main campus has received the top grade for patient safety from the Hospital Safety Association.",
-            image: "https://images.unsplash.com/photo-1579684385186-278297b98544?q=80&w=1000&auto=format&fit=crop"
+            image: maternityImg
         },
         {
             title: "New Cardiac Wing Opens This Fall",
             date: "September 15, 2023",
             excerpt: "Expanding our cardiovascular capabilities with a new state-of-the-art wing dedicated to advanced heart care and specialized surgeries.",
-            image: "https://images.unsplash.com/photo-1516574187841-693083f69802?q=80&w=1000&auto=format&fit=crop"
+            image: radiologyImg
         },
         {
             title: "Community Health Fair 2023",
             date: "August 5, 2023",
             excerpt: "Join us for free screenings, health education, and family fun at our annual community health fair in Downtown Park.",
-            image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop"
+            image:cardiologyImg
         }
     ];
 

@@ -22,7 +22,6 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
     const [results, setResults] = useState<SearchResult[]>([]);
     const inputRef = useRef<HTMLInputElement>(null);
 
-    // Locations data (hardcoded as in Locations.tsx, good practice to extract eventually)
     const locations = [
        { name: "Healing Care Main Campus", address: "123 Healing Way, Orlando, FL" },
        { name: "Northside Medical Center", address: "456 North Blvd, Orlando, FL" },

@@ -27,7 +27,7 @@ export default function Departments() {
                                 <div 
                                     className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl mb-6 transition-colors duration-300"
                                     style={{ 
-                                        backgroundColor: `${department.color}20`, // 20 is hex opacity ~12%
+                                        backgroundColor: `${department.color}20`, 
                                         color: department.color 
                                     }}
                                 >
