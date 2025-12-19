@@ -32,18 +32,18 @@ const Verified = () => {
   }, [token, queryToken]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-2xl p-8 text-center transition-all duration-300">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-slate-900 px-4 transition-colors duration-300">
+      <div className="max-w-md w-full bg-white dark:bg-slate-800 rounded-xl shadow-2xl p-8 text-center transition-all duration-300">
         
         {status === "loading" && <Loading />}
 
         {status === "success" && (
           <div className="flex flex-col items-center animate-fade-in-up">
-            <div className="h-20 w-20 rounded-full bg-green-100 flex items-center justify-center mb-6">
-              <FaCheckCircle className="h-10 w-10 text-green-600" />
+            <div className="h-20 w-20 rounded-full bg-green-100 dark:bg-green-900/20 flex items-center justify-center mb-6">
+              <FaCheckCircle className="h-10 w-10 text-green-600 dark:text-green-500" />
             </div>
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Email Verified!</h2>
-            <p className="text-gray-600 mb-8">
+            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">Email Verified!</h2>
+            <p className="text-gray-600 dark:text-slate-400 mb-8">
               Your email has been successfully verified. <br/> You can now access your account.
             </p>
             <Link
@@ -57,11 +57,11 @@ const Verified = () => {
 
         {status === "error" && (
           <div className="flex flex-col items-center animate-fade-in-up">
-            <div className="h-20 w-20 rounded-full bg-red-100 flex items-center justify-center mb-6">
-              <FaTimesCircle className="h-10 w-10 text-red-600" />
+            <div className="h-20 w-20 rounded-full bg-red-100 dark:bg-red-900/20 flex items-center justify-center mb-6">
+              <FaTimesCircle className="h-10 w-10 text-red-600 dark:text-red-500" />
             </div>
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Verification Failed</h2>
-            <p className="text-gray-600 mb-8">
+            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">Verification Failed</h2>
+            <p className="text-gray-600 dark:text-slate-400 mb-8">
               The verification link is invalid or has expired. <br/> Please try registering again or contact support.
             </p>
             <Link

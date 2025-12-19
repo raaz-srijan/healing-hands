@@ -1,6 +1,31 @@
+import { useState } from 'react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 
 const Contact = () => {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        message: ''
+    });
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            await axios.post(`${import.meta.env.VITE_API_URL}/web/contact`, formData);
+            toast.success("Message sent successfully! We'll be in touch soon.");
+            setFormData({ firstName: '', lastName: '', email: '', message: '' });
+        } catch (error) {
+            console.error("Error sending message:", error);
+            toast.error("Failed to send message. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
          <div className="animate-fade-in-up">
             {/* Page Header */}
@@ -65,27 +90,55 @@ const Contact = () => {
                         {/* Contact Form */}
                         <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
                              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send us a Message</h3>
-                             <form className="space-y-6">
+                             <form className="space-y-6" onSubmit={handleSubmit}>
                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                      <div className="space-y-2">
                                          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">First Name</label>
-                                         <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sky-500 outline-none transition-all" />
+                                         <input 
+                                            type="text" 
+                                            required
+                                            value={formData.firstName}
+                                            onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sky-500 outline-none transition-all" 
+                                        />
                                      </div>
                                      <div className="space-y-2">
                                          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Last Name</label>
-                                         <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sky-500 outline-none transition-all" />
+                                         <input 
+                                            type="text" 
+                                            required
+                                            value={formData.lastName}
+                                            onChange={(e) => setFormData({...formData, lastName: e.target.value})}
+                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sky-500 outline-none transition-all" 
+                                        />
                                      </div>
                                  </div>
                                  <div className="space-y-2">
                                      <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
-                                     <input type="email" className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sky-500 outline-none transition-all" />
+                                     <input 
+                                        type="email" 
+                                        required
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sky-500 outline-none transition-all" 
+                                    />
                                  </div>
                                  <div className="space-y-2">
                                      <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
-                                     <textarea rows={4} className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sky-500 outline-none transition-all"></textarea>
+                                     <textarea 
+                                        rows={4} 
+                                        required
+                                        value={formData.message}
+                                        onChange={(e) => setFormData({...formData, message: e.target.value})}
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sky-500 outline-none transition-all"
+                                     ></textarea>
                                  </div>
-                                 <button className="w-full bg-sky-600 hover:bg-sky-700 text-white py-3.5 rounded-lg font-bold shadow-lg shadow-sky-600/20 transition-all transform hover:-translate-y-1">
-                                     Send Message
+                                 <button 
+                                    type="submit"
+                                    disabled={loading}
+                                    className="w-full bg-sky-600 hover:bg-sky-700 text-white py-3.5 rounded-lg font-bold shadow-lg shadow-sky-600/20 transition-all transform hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed"
+                                 >
+                                     {loading ? 'Sending...' : 'Send Message'}
                                  </button>
                              </form>
                         </div>

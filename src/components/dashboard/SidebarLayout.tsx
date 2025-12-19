@@ -75,11 +75,11 @@ const SidebarLayout = ({ children }: SidebarProps) => {
   // Define Navigation Groups
   const adminNavItems = [
     { name: "Dashboard", path: "/dashboard/admin", icon: <FaTachometerAlt /> },
-    { name: "User Management", path: "/dashboard/admin/users", icon: <FaUsersCog /> },
     { name: "Doctors", path: "/dashboard/admin/doctors", icon: <FaUserMd /> },
     { name: "Nurses", path: "/dashboard/admin/nurses", icon: <FaUserNurse /> },
     { name: "Receptionists", path: "/dashboard/admin/receptionists", icon: <FaConciergeBell /> },
     { name: "Patients", path: "/dashboard/admin/patients", icon: <FaUserInjured /> },
+    { name: "User Management", path: "/dashboard/admin/users", icon: <FaUsersCog /> },
     { name: "Roles & Permissions", path: "/dashboard/admin/roles", icon: <FaLock /> },
   ];
 
@@ -115,7 +115,6 @@ const SidebarLayout = ({ children }: SidebarProps) => {
     { name: "My Profile", path: "/dashboard/patient/profile", icon: <FaUserMd /> },
   ];
 
-  // Determine current nav items based on URL path prefix
   let currentNavItems = adminNavItems;
   let panelTitle = "Admin Panel";
   let userLabel = "Admin";
@@ -316,6 +315,6 @@ const SidebarLayout = ({ children }: SidebarProps) => {
       />
     </div>
   );
-}; // End SidebarLayout
+}; 
 
 export default SidebarLayout;

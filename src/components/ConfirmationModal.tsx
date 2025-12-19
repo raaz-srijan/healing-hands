@@ -79,31 +79,31 @@ const ConfirmationModal = ({
       {/* Modal */}
       <div 
         ref={modalRef}
-        className="relative bg-white rounded-xl shadow-2xl w-full max-w-md p-6 transform transition-all animate-fade-in-up"
+        className="relative bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-md p-6 transform transition-all animate-fade-in-up"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
         <div className="flex flex-col items-center text-center">
           <div className={`p-4 rounded-full bg-opacity-10 mb-4 ${
-              type === 'danger' ? 'bg-red-100' : 
-              type === 'warning' ? 'bg-amber-100' : 'bg-sky-100'
+              type === 'danger' ? 'bg-red-100 dark:bg-red-900/30' : 
+              type === 'warning' ? 'bg-amber-100 dark:bg-amber-900/30' : 'bg-sky-100 dark:bg-sky-900/30'
           }`}>
             {getIcon()}
           </div>
           
-          <h3 id="modal-title" className="text-xl font-bold text-gray-900 mb-2">
+          <h3 id="modal-title" className="text-xl font-bold text-gray-900 dark:text-white mb-2">
             {title}
           </h3>
           
-          <p className="text-gray-500 mb-6">
+          <p className="text-gray-500 dark:text-gray-400 mb-6">
             {message}
           </p>
 
           <div className="flex w-full gap-3">
              <button
               onClick={onClose}
-              className="flex-1 cursor-pointer px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200"
+              className="flex-1 cursor-pointer px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 dark:focus:ring-gray-500"
             >
               {cancelText}
             </button>
@@ -121,7 +121,7 @@ const ConfirmationModal = ({
         
         <button 
             onClick={onClose}
-            className="absolute top-4 cursor-pointer right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            className="absolute top-4 cursor-pointer right-4 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
         >
             <FaTimes />
         </button>

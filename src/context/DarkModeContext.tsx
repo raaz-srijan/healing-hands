@@ -9,8 +9,7 @@ const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined
 
 export const DarkModeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isDark, setIsDark] = useState(() => {
-    // Check local storage or system preference
-    const saved = localStorage.getItem('theme');
+      const saved = localStorage.getItem('theme');
     if (saved) {
       return saved === 'dark';
     }

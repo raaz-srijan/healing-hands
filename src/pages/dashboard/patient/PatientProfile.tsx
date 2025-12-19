@@ -132,29 +132,29 @@ const PatientProfile = () => {
             <div className="max-w-4xl mx-auto space-y-8 animate-fade-in-up pb-10">
                 
                 {/* Personal Info Section */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="p-6 border-b border-gray-100">
-                        <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                            <FaUser className="text-sky-600" />
+                <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden transition-colors duration-300">
+                    <div className="p-6 border-b border-gray-100 dark:border-slate-700">
+                        <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                            <FaUser className="text-sky-600 dark:text-sky-500" />
                             Personal Information
                         </h2>
                     </div>
                     <form onSubmit={handlePersonalSave} className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Date of Birth</label>
                             <input 
                                 type="date" 
                                 required
-                                className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500/20"
+                                className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500/20 bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                 value={profile.personalInfo.DOB}
                                 onChange={e => setProfile({...profile, personalInfo: {...profile.personalInfo, DOB: e.target.value}})}
                             />
                         </div>
                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Gender</label>
                             <select 
                                 required
-                                className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500/20"
+                                className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500/20 bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                 value={profile.personalInfo.Gender}
                                 onChange={e => setProfile({...profile, personalInfo: {...profile.personalInfo, Gender: e.target.value}})}
                             >
@@ -165,9 +165,9 @@ const PatientProfile = () => {
                             </select>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1"><FaTint className="text-red-500"/> Blood Group</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1 flex items-center gap-1"><FaTint className="text-red-500"/> Blood Group</label>
                             <select 
-                                className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500/20"
+                                className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500/20 bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                 value={profile.personalInfo.BloodGroup}
                                 onChange={e => setProfile({...profile, personalInfo: {...profile.personalInfo, BloodGroup: e.target.value}})}
                             >
@@ -178,7 +178,7 @@ const PatientProfile = () => {
                             </select>
                         </div>
                         <div className="md:col-span-3 flex justify-end">
-                            <button disabled={saving} className="px-6 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 flex items-center gap-2">
+                            <button disabled={saving} className="px-6 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 active:bg-sky-800 transition-colors flex items-center gap-2 font-medium shadow-sm">
                                 {saving ? <FaSpinner className="animate-spin"/> : <FaSave />} Save Personal Info
                             </button>
                         </div>
@@ -186,18 +186,18 @@ const PatientProfile = () => {
                 </div>
 
                 {/* Medical Info Section */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="p-6 border-b border-gray-100">
-                        <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                            <FaNotesMedical className="text-emerald-600" />
+                <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden transition-colors duration-300">
+                    <div className="p-6 border-b border-gray-100 dark:border-slate-700">
+                        <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                            <FaNotesMedical className="text-emerald-600 dark:text-emerald-500" />
                             Medical History
                         </h2>
                     </div>
                     <form onSubmit={handleMedicalSave} className="p-6 grid grid-cols-1 gap-6">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1"><FaAllergies className="text-orange-500"/> Allergies</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1 flex items-center gap-1"><FaAllergies className="text-orange-500"/> Allergies</label>
                             <textarea 
-                                className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500/20"
+                                className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500/20 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400"
                                 placeholder="List any known allergies..."
                                 rows={2}
                                 value={profile.medicalInfo[0].Allergies}
@@ -209,9 +209,9 @@ const PatientProfile = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1"><FaPills className="text-blue-500"/> Current Medications</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1 flex items-center gap-1"><FaPills className="text-blue-500"/> Current Medications</label>
                              <textarea 
-                                className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500/20"
+                                className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500/20 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400"
                                 placeholder="List medications separated by commas..."
                                 rows={2}
                                 value={profile.medicalInfo[0].Medications}
@@ -225,7 +225,7 @@ const PatientProfile = () => {
                             />
                         </div>
                          <div className="flex justify-end">
-                            <button disabled={saving} className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 flex items-center gap-2">
+                            <button disabled={saving} className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 active:bg-emerald-800 transition-colors flex items-center gap-2 font-medium shadow-sm">
                                 {saving ? <FaSpinner className="animate-spin"/> : <FaSave />} Save Medical Info
                             </button>
                         </div>
@@ -233,20 +233,20 @@ const PatientProfile = () => {
                 </div>
 
                 {/* Emergency Contact Section */}
-                 <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="p-6 border-b border-gray-100">
-                        <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                            <FaPhone className="text-red-600" />
+                 <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden transition-colors duration-300">
+                    <div className="p-6 border-b border-gray-100 dark:border-slate-700">
+                        <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                            <FaPhone className="text-red-600 dark:text-red-500" />
                             Emergency Contact
                         </h2>
                     </div>
                     <form onSubmit={handleEmergencySave} className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Contact Number</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Contact Number</label>
                             <input 
                                 type="tel" 
                                 required
-                                className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500/20"
+                                className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500/20 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400"
                                 placeholder="Emergency phone number"
                                 value={profile.emergencyInfo[0].contact}
                                 onChange={e => {
@@ -257,11 +257,11 @@ const PatientProfile = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Relation</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Relation</label>
                             <input 
                                 type="text" 
                                 required
-                                className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500/20"
+                                className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500/20 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400"
                                 placeholder="e.g. Spouse, Parent"
                                 value={profile.emergencyInfo[0].relation}
                                 onChange={e => {
@@ -272,7 +272,7 @@ const PatientProfile = () => {
                             />
                         </div>
                         <div className="md:col-span-2 flex justify-end">
-                            <button disabled={saving} className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center gap-2">
+                            <button disabled={saving} className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors flex items-center gap-2 font-medium shadow-sm">
                                 {saving ? <FaSpinner className="animate-spin"/> : <FaSave />} Save Emergency Contact
                             </button>
                         </div>

@@ -1,12 +1,33 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 
+
+interface Job {
+    title: string;
+    type: string;
+    location: string;
+    department?: string;
+}
+
 const Careers = () => {
-    const jobs = [
-        { title: "Registered Nurse - ICU", type: "Full-Time", location: "Main Campus" },
-        { title: "Clinical Cardiologist", type: "Full-Time", location: "Northside" },
-        { title: "Medical Receptionist", type: "Part-Time", location: "Pediatric Clinic" },
-        { title: "Surgical Tech", type: "Full-Time", location: "Main Campus" },
-    ];
+    const [jobs, setJobs] = useState<Job[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchJobs = async () => {
+            try {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/jobs`);
+                setJobs(res.data.jobs || []);
+            } catch (error) {
+                console.error("Error fetching jobs:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchJobs();
+    }, []);
 
     return (
         <div className="animate-fade-in-up">
@@ -41,17 +62,27 @@ const Careers = () => {
                     </div>
 
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Open Positions</h2>
-                    <div className="space-y-4">
-                        {jobs.map((job, idx) => (
-                            <div key={idx} className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700 flex flex-col sm:flex-row justify-between items-center hover:shadow-md transition-shadow">
-                                <div className="mb-4 sm:mb-0">
-                                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">{job.title}</h3>
-                                    <p className="text-gray-500 dark:text-gray-400 text-sm">{job.location} • {job.type}</p>
+                    {loading ? (
+                         <div className="py-12 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 flex justify-center items-center">
+                             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-600"></div>
+                         </div>
+                    ) : jobs.length === 0 ? (
+                        <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700">
+                            <p className="text-gray-500 dark:text-gray-400">There are currently no open positions. Please check back later.</p>
+                        </div>
+                    ) : (
+                        <div className="space-y-4">
+                            {jobs.map((job, idx) => (
+                                <div key={idx} className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700 flex flex-col sm:flex-row justify-between items-center hover:shadow-md transition-shadow">
+                                    <div className="mb-4 sm:mb-0">
+                                        <h3 className="text-lg font-bold text-gray-900 dark:text-white">{job.title}</h3>
+                                        <p className="text-gray-500 dark:text-gray-400 text-sm">{job.location} • {job.type} {job.department ? `• ${job.department}` : ''}</p>
+                                    </div>
+                                    <button className="bg-sky-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-sky-700 transition-colors">Apply Now</button>
                                 </div>
-                                <button className="bg-sky-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-sky-700 transition-colors">Apply Now</button>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </section>
         </div>

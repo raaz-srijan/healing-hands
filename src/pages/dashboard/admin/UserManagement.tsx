@@ -30,6 +30,9 @@ const UserManagement = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState<string | null>(null);
 
+  const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
+  const [roleUpdateData, setRoleUpdateData] = useState<{ userId: string, newRoleId: string, userName: string, newRoleName: string } | null>(null);
+
   useEffect(() => {
     fetchUsersAndRoles();
   }, []);
@@ -78,6 +81,50 @@ const UserManagement = () => {
         setIsDeleteModalOpen(false);
         setUserToDelete(null);
     }
+  };
+
+  const handleRoleChange = (userId: string, newRoleId: string, userName: string) => {
+      const selectedRole = roles.find(r => r._id === newRoleId);
+      if (!selectedRole) return;
+      
+      setRoleUpdateData({
+          userId,
+          newRoleId,
+          userName,
+          newRoleName: selectedRole.name
+      });
+      setIsRoleModalOpen(true);
+  };
+
+  const confirmRoleUpdate = async () => {
+      if (!roleUpdateData) return;
+      
+      try {
+          const token = localStorage.getItem('token');
+          await axios.put(`${import.meta.env.VITE_API_URL}/user/${roleUpdateData.userId}/role`, 
+              { roleId: roleUpdateData.newRoleId },
+              { headers: { Authorization: `Bearer ${token}` } }
+          );
+          
+          toast.success(`Role updated to ${roleUpdateData.newRoleName}`);
+          
+          // Update local state
+          setUsers(users.map(u => {
+              if (u._id === roleUpdateData.userId) {
+                  const newRole = roles.find(r => r._id === roleUpdateData.newRoleId);
+                  // @ts-ignore
+                  return { ...u, role: newRole || u.role }; 
+              }
+              return u;
+          }));
+
+      } catch (error) {
+          console.error("Error updating role:", error);
+          toast.error("Failed to update role");
+      } finally {
+          setIsRoleModalOpen(false);
+          setRoleUpdateData(null);
+      }
   };
 
   // Pagination State
@@ -161,9 +208,8 @@ const UserManagement = () => {
                 <thead>
                     <tr className="bg-gray-50/50 dark:bg-slate-800/50 border-b border-gray-100 dark:border-slate-800 text-xs uppercase tracking-wider text-gray-500 dark:text-slate-400 font-semibold">
                         <th className="px-6 py-4">Name</th>
-                        <th className="px-6 py-4">Role</th>
                         <th className="px-6 py-4">Contact</th>
-                        <th className="px-6 py-4 text-center">Verified</th>
+                        <th className="px-6 py-4">Change Role</th>
                         <th className="px-6 py-4 text-right">Actions</th>
                     </tr>
                 </thead>
@@ -180,21 +226,21 @@ const UserManagement = () => {
                                     <div className="text-xs text-gray-500 dark:text-slate-400">ID: {user._id.slice(-6)}</div>
                                 </td>
                                 <td className="px-6 py-4">
-                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize
-                                        ${(typeof user.role === 'object' && user.role?.name === 'admin') ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300' : 
-                                          (typeof user.role === 'object' && user.role?.name === 'doctor') ? 'bg-sky-100 text-sky-800 dark:bg-sky-900/50 dark:text-sky-300' :
-                                          (typeof user.role === 'object' && user.role?.name === 'nurse') ? 'bg-pink-100 text-pink-800 dark:bg-pink-900/50 dark:text-pink-300' :
-                                          'bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300'
-                                        }`}>
-                                        {typeof user.role === 'object' ? user.role?.name : 'Unknown'}
-                                    </span>
-                                </td>
-                                <td className="px-6 py-4">
                                     <div className="text-gray-900 dark:text-slate-100">{user.email}</div>
                                     <div className="text-sm text-gray-500 dark:text-slate-400">{user.phone}</div>
                                 </td>
-                                <td className="px-6 py-4 text-center">
-                                    <span className={`inline-flex h-2.5 w-2.5 rounded-full ${user.isVerified ? 'bg-green-500' : 'bg-gray-300 dark:bg-slate-600'}`} title={user.isVerified ? 'Verified' : 'Pending'}></span>
+                                <td className="px-6 py-4">
+                                     <select
+                                        value={typeof user.role === 'object' ? user.role._id : ''}
+                                        onChange={(e) => handleRoleChange(user._id, e.target.value, user.name)}
+                                        className="block w-full max-w-[140px] px-2 py-1.5 text-xs rounded-md border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-700 dark:text-slate-200 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+                                     >
+                                         {roles.map(role => (
+                                             <option key={role._id} value={role._id}>
+                                                 {role.name}
+                                             </option>
+                                         ))}
+                                     </select>
                                 </td>
                                 <td className="px-6 py-4 text-right space-x-2">
                                      <button 
@@ -231,6 +277,19 @@ const UserManagement = () => {
             message="Are you sure you want to delete this user? This action cannot be undone."
             confirmText="Delete User"
             type="danger"
+        />
+
+        <ConfirmationModal 
+            isOpen={isRoleModalOpen}
+            onClose={() => {
+                setIsRoleModalOpen(false);
+                setRoleUpdateData(null);
+            }}
+            onConfirm={confirmRoleUpdate}
+            title="Update User Role"
+            message={`Are you sure you want to change ${roleUpdateData?.userName}'s role to "${roleUpdateData?.newRoleName}"? This may affect their access permissions.`}
+            confirmText="Update Role"
+            type="warning"
         />
     </div>
   );

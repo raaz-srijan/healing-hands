@@ -1,8 +1,35 @@
 import SidebarLayout from "../../components/dashboard/SidebarLayout";
 import StatCard from "../../components/dashboard/StatCard";
 import { FaUserInjured, FaClipboardList, FaProcedures, FaBell } from "react-icons/fa";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const NurseDashboard = () => {
+    const [stats, setStats] = useState({
+        assignedPatients: 0,
+        pendingTasks: 0,
+        wardOccupancy: "0%",
+        notifications: 0
+    });
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/stats/nurse`, {
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                });
+                setStats(res.data.data);
+            } catch (error) {
+                console.error("Error fetching nurse stats:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchStats();
+    }, []);
+
   return (
     <SidebarLayout>
       <div className="space-y-8 animate-fade-in-up">
@@ -16,7 +43,7 @@ const NurseDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard 
             title="Assigned Patients" 
-            value="12" 
+            value={loading ? "..." : stats.assignedPatients.toString()} 
             icon={<FaUserInjured />} 
             trend="+2 New Admissions" 
             trendUp={true} 
@@ -24,7 +51,7 @@ const NurseDashboard = () => {
           />
           <StatCard 
             title="Pending Tasks" 
-            value="5" 
+            value={loading ? "..." : stats.pendingTasks.toString()} 
             icon={<FaClipboardList />} 
             trend="Due within 2h" 
             trendUp={false} 
@@ -32,7 +59,7 @@ const NurseDashboard = () => {
           />
           <StatCard 
             title="Ward Occupancy" 
-            value="85%" 
+            value={loading ? "..." : stats.wardOccupancy} 
             icon={<FaProcedures />} 
             trend="General Ward A" 
             trendUp={true} 
@@ -40,7 +67,7 @@ const NurseDashboard = () => {
           />
            <StatCard 
             title="Notifications" 
-            value="3" 
+            value={loading ? "..." : stats.notifications.toString()} 
             icon={<FaBell />} 
             trend="New Alerts" 
             trendUp={true} 

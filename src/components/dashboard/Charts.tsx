@@ -25,7 +25,11 @@ ChartJS.register(
   Filler
 );
 
-export const AppointmentsChart = () => {
+interface AppointmentsChartProps {
+    data?: Record<string, number>;
+}
+
+export const AppointmentsChart = ({ data: appointmentData }: AppointmentsChartProps) => {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -46,12 +50,16 @@ export const AppointmentsChart = () => {
     return () => observer.disconnect();
   }, []);
 
-  const data = {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  // Default structure if no data
+  const labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const values = labels.map(day => appointmentData ? appointmentData[day] || 0 : 0);
+
+  const chartData = {
+    labels,
     datasets: [
       {
         label: "Appointments",
-        data: [12, 19, 15, 25, 22, 10, 5],
+        data: values,
         borderColor: "#0284c7",
         backgroundColor: "rgba(2, 132, 199, 0.1)",
         tension: 0.4,
@@ -62,6 +70,7 @@ export const AppointmentsChart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false,
@@ -73,22 +82,23 @@ export const AppointmentsChart = () => {
             size: 16,
             weight: 'bold' as 'bold'
         }, 
-        color: isDark ? '#ffffff' : '#1f2937'
+        color: isDark ? '#f1f5f9' : '#1e293b' // slate-100 : slate-800
       },
     },
     scales: {
       y: {
         beginAtZero: true,
         ticks: {
-          color: isDark ? '#9ca3af' : '#6b7280'
+          stepSize: 1,
+          color: isDark ? '#94a3b8' : '#64748b' // slate-400 : slate-500
         },
         grid: {
-            color: isDark ? '#374151' : '#f3f4f6'
+            color: isDark ? '#334155' : '#e2e8f0' // slate-700 : slate-200
         }
       },
       x: {
         ticks: {
-          color: isDark ? '#9ca3af' : '#6b7280'
+          color: isDark ? '#94a3b8' : '#64748b'
         },
         grid: {
             display: false
@@ -97,10 +107,14 @@ export const AppointmentsChart = () => {
     },
   };
 
-  return <Line options={options} data={data} />;
+  return <div className="h-full w-full"><Line options={options} data={chartData} /></div>;
 };
 
-export const PatientFlowChart = () => {
+interface PatientFlowChartProps {
+    data?: { month: string; newPatients: number; discharged: number }[];
+}
+
+export const PatientFlowChart = ({ data: flowData }: PatientFlowChartProps) => {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -121,17 +135,19 @@ export const PatientFlowChart = () => {
     return () => observer.disconnect();
   }, []);
 
-  const data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+  const labels = flowData ? flowData.map(d => d.month) : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
+  
+  const chartData = {
+    labels: labels,
     datasets: [
       {
         label: "New Patients",
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: flowData ? flowData.map(d => d.newPatients) : [65, 59, 80, 81, 56, 55, 40],
         backgroundColor: "#0f766e", 
       },
       {
         label: "Discharged",
-        data: [28, 48, 40, 19, 86, 27, 90],
+        data: flowData ? flowData.map(d => d.discharged) : [28, 48, 40, 19, 86, 27, 90],
         backgroundColor: "#cbd5e1",
       },
     ],
@@ -139,11 +155,12 @@ export const PatientFlowChart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top" as const,
         labels: {
-          color: isDark ? '#e5e7eb' : '#374151'
+          color: isDark ? '#e2e8f0' : '#475569' // slate-200 : slate-600
         }
       },
       title: {
@@ -153,21 +170,23 @@ export const PatientFlowChart = () => {
             size: 16,
             weight: 'bold' as 'bold'
         },
-        color: isDark ? '#ffffff' : '#1f2937'
+        color: isDark ? '#f1f5f9' : '#1e293b'
       },
     },
     scales: {
         y: {
+            beginAtZero: true,
             ticks: {
-              color: isDark ? '#9ca3af' : '#6b7280'
+              stepSize: 1,
+              color: isDark ? '#94a3b8' : '#64748b'
             },
             grid: {
-                color: isDark ? '#374151' : '#f3f4f6'
+                color: isDark ? '#334155' : '#e2e8f0'
             }
         },
         x: {
             ticks: {
-              color: isDark ? '#9ca3af' : '#6b7280'
+              color: isDark ? '#94a3b8' : '#64748b'
             },
             grid: {
                 display: false
@@ -176,6 +195,6 @@ export const PatientFlowChart = () => {
     }
   };
 
-  return <Bar options={options} data={data} />;
+  return <div className="h-full w-full"><Bar options={options} data={chartData} /></div>;
 };
 

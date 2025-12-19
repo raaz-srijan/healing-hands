@@ -25,7 +25,6 @@ function App() {
           {/* Public Routes */}
           <Route path="/*" element={<PublicRoutes />} />
           
-          {/* Auth Routes (Login/Register) - Only accessible if NOT logged in */}
           <Route element={<PublicOnlyRoute />}>
              <Route path="auth/*" element={<AuthRoutes />} />
           </Route>
@@ -53,11 +52,6 @@ function App() {
             <Route path="dashboard/patient/*" element={<PatientRoutes />} />
           </Route>
 
-          {/* 404 Catch-all - typically needs to be last, but since PublicRoutes catches /*, we might need to adjust PublicRoutes to not match everything or put this inside PublicRoutes. 
-             Actually, PublicRoutes has index and specific paths. If PublicRoutes uses /* in App.tsx, it matches everything.
-             Better approach: PublicRoutes should probably NOT be mapped to /* at the top level if we want a global 404.
-             However, since PublicLayout has an Outlet, the 404 for public pages should be inside PublicRoutes.
-          */}
         </Routes>
       </AuthInitializer>
     </DarkModeProvider>

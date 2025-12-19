@@ -72,29 +72,29 @@ const ReceptionistRegister = () => {
     return (
         <SidebarLayout>
              <div className="max-w-3xl mx-auto space-y-6 animate-fade-in-up">
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="p-6 border-b border-gray-100">
-                        <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                            <FaUserPlus className="text-sky-600" />
+                <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden transition-colors duration-300">
+                    <div className="p-6 border-b border-gray-100 dark:border-slate-700">
+                        <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                            <FaUserPlus className="text-sky-600 dark:text-sky-500" />
                             Register New Patient
                         </h2>
-                        <p className="text-sm text-gray-500">Create a new patient account.</p>
+                        <p className="text-sm text-gray-500 dark:text-slate-400">Create a new patient account.</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="p-8 space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {/* Full Name */}
                             <div className="col-span-2">
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Full Name</label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <FaUser className="text-gray-400" />
+                                        <FaUser className="text-gray-400 dark:text-slate-500" />
                                     </div>
                                     <input 
                                         type="text" 
                                         name="name"
                                         required
-                                        className="pl-10 w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all"
+                                        className="pl-10 w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-600 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400"
                                         placeholder="Enter patient full name"
                                         value={formData.name}
                                         onChange={handleChange}
@@ -104,16 +104,16 @@ const ReceptionistRegister = () => {
 
                             {/* Email */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Email Address</label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <FaEnvelope className="text-gray-400" />
+                                        <FaEnvelope className="text-gray-400 dark:text-slate-500" />
                                     </div>
                                     <input 
                                         type="email" 
                                         name="email"
                                         required
-                                        className="pl-10 w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all"
+                                        className="pl-10 w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-600 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400"
                                         placeholder="patient@example.com"
                                         value={formData.email}
                                         onChange={handleChange}
@@ -123,16 +123,16 @@ const ReceptionistRegister = () => {
 
                             {/* Phone */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Phone Number</label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <FaPhone className="text-gray-400" />
+                                        <FaPhone className="text-gray-400 dark:text-slate-500" />
                                     </div>
                                     <input 
                                         type="tel" 
                                         name="phone"
                                         required
-                                        className="pl-10 w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all"
+                                        className="pl-10 w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-600 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400"
                                         placeholder="000-000-0000"
                                         value={formData.phone}
                                         onChange={handleChange}
@@ -142,15 +142,15 @@ const ReceptionistRegister = () => {
 
                             {/* Gender */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Gender</label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <FaMars className="text-gray-400" />
+                                        <FaMars className="text-gray-400 dark:text-slate-500" />
                                     </div>
                                     <select 
                                         name="gender"
                                         required
-                                        className="pl-10 w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all bg-white"
+                                        className="pl-10 w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-600 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                         value={formData.gender}
                                         onChange={handleChange}
                                     >
@@ -167,12 +167,12 @@ const ReceptionistRegister = () => {
 
                             {/* Password */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Password</label>
                                 <input 
                                     type="password" 
                                     name="password"
                                     required
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-600 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400"
                                     placeholder="Temp Password"
                                     value={formData.password}
                                     onChange={handleChange}
@@ -181,12 +181,12 @@ const ReceptionistRegister = () => {
 
                              {/* Confirm Password */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Confirm Password</label>
                                 <input 
                                     type="password" 
                                     name="confirmPassword"
                                     required
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-600 focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400"
                                     placeholder="Confirm Temp Password"
                                     value={formData.confirmPassword}
                                     onChange={handleChange}

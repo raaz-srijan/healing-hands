@@ -42,7 +42,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
             <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
                 <FaChevronLeft size={14} />
             </button>
@@ -54,10 +54,10 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
                     disabled={typeof page !== 'number'}
                     className={`min-w-[32px] h-8 rounded-lg text-sm font-medium transition-colors ${
                         page === currentPage
-                            ? 'bg-sky-600 text-white shadow-sm shadow-sky-200'
+                            ? 'bg-sky-600 text-white shadow-sm shadow-sky-200 dark:shadow-none'
                             : typeof page === 'number'
-                            ? 'text-gray-600 hover:bg-gray-50 border border-gray-200'
-                            : 'text-gray-400 cursor-default'
+                            ? 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
+                            : 'text-gray-400 dark:text-gray-500 cursor-default'
                     }`}
                 >
                     {page}
@@ -67,7 +67,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
             <button
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
                 <FaChevronRight size={14} />
             </button>

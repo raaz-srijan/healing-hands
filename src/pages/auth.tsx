@@ -119,7 +119,7 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 font-sans">
+    <div className="flex min-h-screen bg-gray-50 dark:bg-slate-900 font-sans transition-colors duration-300">
       {loading && <Loading />}
       {/* Left Side - Hero Section */}
       <div className="hidden lg:flex w-1/2 relative bg-gray-900 overflow-hidden">
@@ -142,17 +142,17 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
       </div>
 
       {/* Right Side - Form Section */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center py-12 px-6 lg:px-20 bg-white">
+      <div className="w-full lg:w-1/2 flex flex-col justify-center py-12 px-6 lg:px-20 bg-white dark:bg-slate-800 transition-colors duration-300">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
            {/* Mobile Logo */}
           <div className="lg:hidden flex justify-center mb-6">
               <FaHospital className="text-5xl text-sky-600" />
           </div>
           
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-2">
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-2">
             {type === "login" ? "Sign In" : "Get Started"}
           </h2>
-          <p className="text-center text-gray-500 mb-8">
+          <p className="text-center text-gray-500 dark:text-slate-400 mb-8">
             {type === "login"
               ? "Access your dashboard and manage your tasks."
               : "Create your account to join the network."}
@@ -163,10 +163,10 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
           <form className="space-y-5" onSubmit={handleSubmit}>
             {type === "register" && (
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Full Name</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FaUser className="text-gray-400" />
+                    <FaUser className="text-gray-400 dark:text-slate-500" />
                   </div>
                   <input
                     name="name"
@@ -175,7 +175,7 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
                     onChange={handleChange}
                     required
                     disabled={loading}
-                    className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 rounded-lg focus:ring-sky-500 focus:border-sky-500 transition-colors duration-200 outline-none"
+                    className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400 transition-colors duration-200 outline-none"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -183,10 +183,10 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
             )}
 
             <div className="relative">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Email Address</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaEnvelope className="text-gray-400" />
+                  <FaEnvelope className="text-gray-400 dark:text-slate-500" />
                 </div>
                 <input
                   name="email"
@@ -195,7 +195,7 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
                   onChange={handleChange}
                   required
                   disabled={loading}
-                  className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 rounded-lg focus:ring-sky-500 focus:border-sky-500 transition-colors duration-200 outline-none"
+                  className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400 transition-colors duration-200 outline-none"
                   placeholder="Enter your email address"
                 />
               </div>
@@ -204,10 +204,10 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
             {type === "register" && (
               <>
                 <div className="relative">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Phone Number</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <FaPhone className="text-gray-400" />
+                      <FaPhone className="text-gray-400 dark:text-slate-500" />
                     </div>
                     <input
                       name="phone"
@@ -216,17 +216,17 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
                       onChange={handleChange}
                       required
                       disabled={loading}
-                      className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 rounded-lg focus:ring-sky-500 focus:border-sky-500 transition-colors duration-200 outline-none"
+                      className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400 transition-colors duration-200 outline-none"
                       placeholder="Enter your phone number"
                     />
                   </div>
                 </div>
 
                 <div className="relative">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Gender</label>
                   <div className="relative">
                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <FaMars className="text-gray-400" />
+                      <FaMars className="text-gray-400 dark:text-slate-500" />
                     </div>
                     <select
                       name="gender"
@@ -234,12 +234,12 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
                       onChange={handleChange}
                       required
                       disabled={loading}
-                      className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 rounded-lg focus:ring-sky-500 focus:border-sky-500 transition-colors duration-200 outline-none bg-white"
+                      className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-white transition-colors duration-200 outline-none appearance-none"
                     >
-                      <option value="">Select Gender</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="other">Other</option>
+                      <option value="" className="dark:bg-slate-700">Select Gender</option>
+                      <option value="male" className="dark:bg-slate-700">Male</option>
+                      <option value="female" className="dark:bg-slate-700">Female</option>
+                      <option value="other" className="dark:bg-slate-700">Other</option>
                     </select>
                   </div>
                 </div>
@@ -247,10 +247,10 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
             )}
 
             <div className="relative">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Password</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaLock className="text-gray-400" />
+                  <FaLock className="text-gray-400 dark:text-slate-500" />
                 </div>
                 <input
                   name="password"
@@ -259,7 +259,7 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
                   onChange={handleChange}
                   required
                   disabled={loading}
-                  className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 rounded-lg focus:ring-sky-500 focus:border-sky-500 transition-colors duration-200 outline-none"
+                  className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400 transition-colors duration-200 outline-none"
                   placeholder="Enter your password"
                 />
               </div>
@@ -267,10 +267,10 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
 
             {type === "register" && (
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Confirm Password</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FaLock className="text-gray-400" />
+                    <FaLock className="text-gray-400 dark:text-slate-500" />
                   </div>
                   <input
                     name="confirmPassword"
@@ -279,7 +279,7 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
                     onChange={handleChange}
                     required
                     disabled={loading}
-                    className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 rounded-lg focus:ring-sky-500 focus:border-sky-500 transition-colors duration-200 outline-none"
+                    className="block w-full pl-10 pr-3 py-2.5 sm:text-sm border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400 transition-colors duration-200 outline-none"
                     placeholder="Enter your password"
                   />
                 </div>
@@ -300,10 +300,10 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300" />
+                <div className="w-full border-t border-gray-300 dark:border-slate-700" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
+                <span className="px-2 bg-white dark:bg-slate-800 text-gray-500 dark:text-slate-400">
                   {type === "login" ? "New here?" : "Already joined?"}
                 </span>
               </div>
@@ -312,7 +312,7 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
             <div className="mt-6 flex justify-center">
                 <Link 
                     to={type === "login" ? "/auth/register" : "/auth//login"}
-                    className="font-medium text-sky-600 hover:text-sky-500 transition-colors"
+                    className="font-medium text-sky-600 hover:text-sky-500 dark:text-sky-400 dark:hover:text-sky-300 transition-colors"
                 >
                     {type === "login" ? "Create an account" : "Sign in to your account"}
                 </Link>

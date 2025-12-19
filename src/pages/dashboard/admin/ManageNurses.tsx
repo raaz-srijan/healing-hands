@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { FaUserNurse, FaSearch, FaTrash } from 'react-icons/fa';
-import Loading from '../../../components/Loading';
 import ConfirmationModal from '../../../components/ConfirmationModal';
 import Pagination from '../../../components/Pagination';
 
@@ -29,12 +28,11 @@ const ManageNurses = () => {
   const fetchNurses = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/user/all`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/user/all?role=nurse`, {
           headers: { Authorization: `Bearer ${token}` }
       });
       
-      const allUsers = res.data.users || [];
-      const nurseUsers = allUsers.filter((u: any) => u.role?.name === 'nurse');
+      const nurseUsers = res.data.users || [];
       setNurses(nurseUsers);
     } catch (error) {
       console.error("Error fetching nurses:", error);
@@ -123,29 +121,74 @@ const ManageNurses = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-50 dark:divide-slate-800">
                     {loading ? (
-                         <tr><td colSpan={4} className="py-20 relative h-32"><Loading /></td></tr>
-                    ) : displayedNurses.length === 0 ? (
-                         <tr><td colSpan={4} className="px-6 py-12 text-center text-gray-400 dark:text-slate-500">No nurses found.</td></tr>
-                    ) : (
-                        displayedNurses.map(nurse => (
-                            <tr key={nurse._id} className="hover:bg-gray-50/50 dark:hover:bg-slate-800/50 transition-colors">
+                        // Professional Skeleton Loader
+                        [...Array(5)].map((_, i) => (
+                            <tr key={i} className="animate-pulse">
                                 <td className="px-6 py-4">
-                                    <div className="font-medium text-gray-900 dark:text-slate-100">{nurse.name}</div>
+                                    <div className="h-4 bg-gray-200 dark:bg-slate-700 rounded w-32 mb-2"></div>
                                 </td>
                                 <td className="px-6 py-4">
-                                    <div className="text-gray-900 dark:text-slate-100">{nurse.email}</div>
+                                    <div className="h-4 bg-gray-200 dark:bg-slate-700 rounded w-40 mb-2"></div>
+                                    <div className="h-3 bg-gray-100 dark:bg-slate-800 rounded w-24"></div>
+                                </td>
+                                <td className="px-6 py-4 text-center">
+                                    <div className="h-3 w-3 bg-gray-200 dark:bg-slate-700 rounded-full mx-auto"></div>
+                                </td>
+                                <td className="px-6 py-4 text-right">
+                                    <div className="h-8 w-8 bg-gray-100 dark:bg-slate-800 rounded-lg ml-auto"></div>
+                                </td>
+                            </tr>
+                        ))
+                    ) : displayedNurses.length === 0 ? (
+                        // Rich Empty State
+                         <tr>
+                            <td colSpan={4} className="px-6 py-12 text-center">
+                                <div className="flex flex-col items-center justify-center p-8 bg-gray-50/50 dark:bg-slate-800/50 rounded-lg border-2 border-dashed border-gray-200 dark:border-slate-700">
+                                    <div className="p-3 bg-white dark:bg-slate-800 rounded-full shadow-sm mb-3">
+                                        <FaUserNurse className="text-gray-300 dark:text-slate-600 text-2xl" />
+                                    </div>
+                                    <h3 className="text-gray-900 dark:text-white font-medium mb-1">No nurses found</h3>
+                                    <p className="text-gray-500 dark:text-slate-400 text-sm max-w-xs mx-auto">
+                                        {searchTerm ? `No results found for "${searchTerm}".` : "Get started by adding a new nurse to the system."}
+                                    </p>
+                                    {searchTerm && (
+                                        <button 
+                                            onClick={() => setSearchTerm('')} 
+                                            className="mt-4 text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 text-sm font-medium hover:underline"
+                                        >
+                                            Clear Search
+                                        </button>
+                                    )}
+                                </div>
+                            </td>
+                         </tr>
+                    ) : (
+                        displayedNurses.map(nurse => (
+                            <tr key={nurse._id} className="hover:bg-gray-50/80 dark:hover:bg-slate-800/80 transition-all duration-200 group">
+                                <td className="px-6 py-4">
+                                    <div className="font-medium text-gray-900 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">{nurse.name}</div>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <div className="text-gray-900 dark:text-slate-200">{nurse.email}</div>
                                     <div className="text-sm text-gray-500 dark:text-slate-400">{nurse.phone}</div>
                                 </td>
                                 <td className="px-6 py-4 text-center">
-                                    <span className={`inline-flex h-2.5 w-2.5 rounded-full ${nurse.isVerified ? 'bg-green-500' : 'bg-gray-300 dark:bg-slate-600'}`} title={nurse.isVerified ? 'Verified' : 'Pending'}></span>
+                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                            nurse.isVerified 
+                                            ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800' 
+                                            : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800'
+                                        }`}
+                                    >
+                                        {nurse.isVerified ? 'Verified' : 'Pending'}
+                                    </span>
                                 </td>
                                 <td className="px-6 py-4 text-right space-x-2">
                                      <button 
                                         onClick={() => handleDeleteClick(nurse._id)}
-                                        className="text-gray-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1" 
+                                        className="text-gray-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 p-2 rounded-lg transition-all transform hover:scale-105" 
                                         title="Delete Nurse"
                                     >
-                                        <FaTrash />
+                                        <FaTrash size={14} />
                                     </button>
                                 </td>
                             </tr>

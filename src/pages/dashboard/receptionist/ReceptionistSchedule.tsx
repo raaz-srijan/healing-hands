@@ -73,18 +73,18 @@ const ReceptionistSchedule = () => {
     return (
         <SidebarLayout>
             <div className="max-w-4xl mx-auto space-y-6 animate-fade-in-up">
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="p-6 border-b border-gray-100 flex justify-between items-center">
+                <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden transition-colors duration-300">
+                    <div className="p-6 border-b border-gray-100 dark:border-slate-700 flex justify-between items-center">
                         <div>
-                            <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                                <FaCalendarAlt className="text-sky-600" />
+                            <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                                <FaCalendarAlt className="text-sky-600 dark:text-sky-500" />
                                 Manage Schedule
                             </h2>
-                            <p className="text-sm text-gray-500">Set your weekly shift timings.</p>
+                            <p className="text-sm text-gray-500 dark:text-slate-400">Set your weekly shift timings.</p>
                         </div>
                         <button 
                             onClick={addShift} 
-                            className="flex items-center gap-2 px-4 py-2 bg-sky-50 text-sky-600 rounded-lg hover:bg-sky-100 transition-colors font-medium text-sm"
+                            className="flex items-center gap-2 px-4 py-2 bg-sky-50 text-sky-600 dark:bg-sky-900/30 dark:text-sky-300 rounded-lg hover:bg-sky-100 dark:hover:bg-sky-900/50 transition-colors font-medium text-sm"
                         >
                             <FaPlus /> Add Shift
                         </button>
@@ -95,16 +95,16 @@ const ReceptionistSchedule = () => {
                     ) : (
                         <div className="p-6 space-y-4">
                             {shifts.length === 0 ? (
-                                <div className="text-center py-8 text-gray-400 border-2 border-dashed border-gray-100 rounded-lg">
+                                <div className="text-center py-8 text-gray-400 dark:text-slate-500 border-2 border-dashed border-gray-100 dark:border-slate-700 rounded-lg">
                                     No shifts assigned. Click "Add Shift" to start.
                                 </div>
                             ) : (
                                 shifts.map((shift, index) => (
-                                    <div key={index} className="flex flex-col md:flex-row gap-4 items-end md:items-center bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                    <div key={index} className="flex flex-col md:flex-row gap-4 items-end md:items-center bg-gray-50 dark:bg-slate-700/50 p-4 rounded-lg border border-gray-200 dark:border-slate-600 transition-colors duration-300">
                                         <div className="flex-1 w-full">
-                                            <label className="block text-xs font-medium text-gray-500 mb-1">Day</label>
+                                            <label className="block text-xs font-medium text-gray-500 dark:text-slate-400 mb-1">Day</label>
                                             <select 
-                                                className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500/20"
+                                                className="w-full px-3 py-2 rounded border border-gray-300 dark:border-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/20 bg-white dark:bg-slate-600 text-gray-900 dark:text-white"
                                                 value={shift.day}
                                                 onChange={(e) => updateShift(index, 'day', e.target.value)}
                                             >
@@ -114,26 +114,26 @@ const ReceptionistSchedule = () => {
                                             </select>
                                         </div>
                                         <div className="flex-1 w-full">
-                                            <label className="block text-xs font-medium text-gray-500 mb-1">Start Time</label>
+                                            <label className="block text-xs font-medium text-gray-500 dark:text-slate-400 mb-1">Start Time</label>
                                             <input 
                                                 type="time" 
-                                                className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500/20"
+                                                className="w-full px-3 py-2 rounded border border-gray-300 dark:border-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/20 bg-white dark:bg-slate-600 text-gray-900 dark:text-white"
                                                 value={shift.startTime}
                                                 onChange={(e) => updateShift(index, 'startTime', e.target.value)}
                                             />
                                         </div>
                                         <div className="flex-1 w-full">
-                                            <label className="block text-xs font-medium text-gray-500 mb-1">End Time</label>
+                                            <label className="block text-xs font-medium text-gray-500 dark:text-slate-400 mb-1">End Time</label>
                                             <input 
                                                 type="time" 
-                                                className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500/20"
+                                                className="w-full px-3 py-2 rounded border border-gray-300 dark:border-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/20 bg-white dark:bg-slate-600 text-gray-900 dark:text-white"
                                                 value={shift.endTime}
                                                 onChange={(e) => updateShift(index, 'endTime', e.target.value)}
                                             />
                                         </div>
                                         <button 
                                             onClick={() => removeShift(index)}
-                                            className="p-2 text-red-500 hover:bg-red-50 rounded transition-colors"
+                                            className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 rounded transition-colors"
                                             title="Remove Shift"
                                         >
                                             <FaTrash />
@@ -142,7 +142,7 @@ const ReceptionistSchedule = () => {
                                 ))
                             )}
 
-                            <div className="pt-4 flex justify-end border-t border-gray-100 mt-6">
+                            <div className="pt-4 flex justify-end border-t border-gray-100 dark:border-slate-700 mt-6">
                                 <button 
                                     onClick={handleSave}
                                     disabled={saving}

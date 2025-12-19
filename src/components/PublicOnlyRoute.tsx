@@ -7,7 +7,6 @@ const PublicOnlyRoute = () => {
     const userRole = user?.role;
 
     if (userId) {
-        // Redirect to their respective dashboard based on role case-insensitively
         const normalizedRole = userRole?.toLowerCase();
         
         switch (normalizedRole) {
@@ -19,7 +18,7 @@ const PublicOnlyRoute = () => {
             default: return <Navigate to="/" replace />;
         }
     }
-
+    
     return <Outlet />;
 };
 
