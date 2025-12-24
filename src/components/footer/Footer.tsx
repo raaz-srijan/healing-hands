@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { FaChevronRight, FaFacebook, FaHospital, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { FaChevronRight, FaFacebook, FaHospital, FaInstagram,  FaTwitter, FaYoutube } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 const Footer = () => {

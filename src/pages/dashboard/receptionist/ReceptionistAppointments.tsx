@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import SidebarLayout from '../../../components/dashboard/SidebarLayout';
-import { FaCalendarCheck, FaUser, FaClock, FaCheck, FaTimes, FaBan } from 'react-icons/fa';
+import { FaCalendarCheck, FaUser, FaClock, FaCheck,  FaBan } from 'react-icons/fa';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';

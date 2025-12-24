@@ -72,9 +72,7 @@ const ManageChatbot: React.FC = () => {
     setError('');
     try {
       const response = await axios.get(`${API_URL}/faqs`, {
-        headers: { Authorization: `Bearer ${token}`,
-        Role:role,
-      }
+        headers: { Authorization: `Bearer ${token}` ,Role:role}
       });
       setFaqs(response.data);
     } catch (err: any) {

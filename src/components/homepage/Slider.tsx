@@ -2,30 +2,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { consultantImg1, hosp1, hosp2, surgeryImg } from "../../constants/images";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const CustomArrow = ({ className, style, onClick, direction }: any) => {
-  return (
-    <div
-      className={`${className} !flex items-center justify-center z-10 w-10 h-10 md:w-12 md:h-12 rounded-full cursor-pointer
-        bg-black/20 hover:bg-black/40 backdrop-blur-sm border border-white/10 shadow-lg 
-        transition-all duration-300 transform hover:scale-110 !text-white`}
-      style={{ 
-        ...style, 
-        [direction === "left" ? "left" : "right"]: "20px",
-        display: "flex",
-        opacity: 1 
-      }}
-      onClick={onClick}
-    >
-        {direction === "left" ? (
-             <FaChevronLeft className="text-white text-base md:text-lg drop-shadow-md"/>
-        ) : (
-             <FaChevronRight className="text-white text-base md:text-lg drop-shadow-md"/>
-        )}
-    </div>
-  );
-};
+
 
 const slides = [
     { 

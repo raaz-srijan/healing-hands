@@ -43,7 +43,6 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
         const lowerQuery = query.toLowerCase();
         const newResults: SearchResult[] = [];
 
-        // Search Doctors
         consultData.forEach(doc => {
             if (doc.name.toLowerCase().includes(lowerQuery) || doc.depart.toLowerCase().includes(lowerQuery)) {
                 newResults.push({
@@ -56,7 +55,6 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
             }
         });
 
-        // Search Departments
         departmentData.forEach(dept => {
              if (dept.name.toLowerCase().includes(lowerQuery) || dept.description.toLowerCase().includes(lowerQuery)) {
                 newResults.push({
@@ -64,12 +62,11 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
                     title: dept.name,
                     subtitle: 'Medical Department',
                     link: '/services',
-                    icon: dept.icon // Use the component directly or FaHospital as fallback if needed
+                    icon: dept.icon 
                 });
             }
         });
 
-         // Search Locations
          locations.forEach(loc => {
             if (loc.name.toLowerCase().includes(lowerQuery) || loc.address.toLowerCase().includes(lowerQuery)) {
                newResults.push({

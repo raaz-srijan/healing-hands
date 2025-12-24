@@ -3,81 +3,60 @@ import { MdAccessibility } from "react-icons/md";
 
 export default function Accessibility() {
   return (
-    <div className="relative w-full min-h-screen bg-gray-900 text-white py-16 px-6 md:px-16 lg:px-32">
+    <div className="relative w-full min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white py-12 px-6 md:px-16 lg:px-32">
 
       {/* Header */}
-      <div className="flex items-center gap-3 mb-8">
-        <MdAccessibility className="text-3xl text-sky-400" />
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold drop-shadow-lg">
-          Accessibility Statement
-        </h1>
+      <div className="max-w-4xl mx-auto mb-8">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-md bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center text-sky-600 dark:text-sky-300">
+            <MdAccessibility className="text-2xl" />
+          </div>
+          <div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold">Accessibility Statement</h1>
+            <p className="mt-1 text-gray-600 dark:text-gray-300">Our commitment to accessibility and how we support all users.</p>
+          </div>
+        </div>
       </div>
 
-      {/* Intro Section */}
-      <p className="text-gray-300 mb-8 text-lg md:text-xl leading-relaxed max-w-4xl">
-        We are committed to ensuring that our website is accessible to all users, including those with disabilities. This page explains our efforts and guidelines for accessibility.
-      </p>
+      {/* Intro */}
+      <div className="max-w-4xl mx-auto mb-8">
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+          We are committed to ensuring our website is usable for everyone, including people with disabilities. This statement outlines our accessibility practices and how to provide feedback.
+        </p>
+      </div>
 
       {/* Sections */}
-      <div className="space-y-8 max-w-4xl text-gray-300">
-
+      <div className="max-w-4xl mx-auto space-y-8">
         <section>
-          <h2 className="text-2xl font-bold text-white mb-3 drop-shadow-md">
-            1. Our Commitment
-          </h2>
-          <p className="leading-relaxed">
-            We strive to make our website usable for everyone, following best practices and accessibility standards such as WCAG 2.1. Our goal is to provide equal access to all content and services.
-          </p>
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3">1. Our Commitment</h2>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">We strive to meet WCAG 2.1 standards where feasible and continually improve the accessibility of our content and services.</p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-white mb-3 drop-shadow-md">
-            2. Accessibility Features
-          </h2>
-          <p className="leading-relaxed">
-            Some of the features we have implemented include keyboard navigation, descriptive alt text for images, proper heading structure, sufficient color contrast, and resizable text.
-          </p>
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3">2. Accessibility Features</h2>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">Features include keyboard navigation, meaningful alt text for images, proper headings, sufficient color contrast, and resizable text. We test using automated tools and manual reviews.</p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-white mb-3 drop-shadow-md">
-            3. Limitations
-          </h2>
-          <p className="leading-relaxed">
-            While we work to make our website accessible, some content or third-party components may not fully conform to accessibility standards. We continuously improve our website to address these limitations.
-          </p>
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3">3. Limitations</h2>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">Some third-party content or embedded components may not fully conform to accessibility standards. We are working with vendors and updating integrations as improvements become available.</p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-white mb-3 drop-shadow-md">
-            4. Feedback
-          </h2>
-          <p className="leading-relaxed">
-            We welcome feedback regarding accessibility. If you encounter any issues or have suggestions, please <Link to="/contact" className="text-sky-400 hover:underline">contact us</Link>. We aim to respond promptly and make improvements wherever possible.
-          </p>
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3">4. Feedback</h2>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">If you encounter accessibility barriers, please <Link to="/contact" className="text-sky-600 dark:text-sky-300 hover:underline">contact us</Link>. Provide details of the issue and your preferred contact method; we aim to respond promptly and provide accessible alternatives where possible.</p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-white mb-3 drop-shadow-md">
-            5. Ongoing Efforts
-          </h2>
-          <p className="leading-relaxed">
-            Accessibility is an ongoing effort. We regularly review our website, conduct accessibility testing, and implement changes to improve usability for all visitors.
-          </p>
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3">5. Ongoing Efforts</h2>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">Accessibility is an ongoing process. We regularly review our site, update content, and perform accessibility testing to improve usability for all visitors.</p>
         </section>
-
       </div>
 
-      {/* Footer CTA */}
-      <div className="mt-12">
-        <Link
-          to="/"
-          className="inline-block bg-sky-600 hover:bg-sky-700 text-white px-8 py-4 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg shadow-sky-900/20"
-        >
-          Back to Home
-        </Link>
+      {/* CTA */}
+      <div className="max-w-4xl mx-auto mt-12">
+        <Link to="/" className="inline-block bg-sky-600 hover:bg-sky-700 text-white px-6 py-3 rounded-full font-semibold transition-transform transform hover:scale-105 shadow">Back to Home</Link>
       </div>
-
     </div>
   );
 }

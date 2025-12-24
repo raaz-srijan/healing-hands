@@ -1,7 +1,11 @@
 import consultData from "../../constants/consultData";
 import { FaMapMarkerAlt,  FaPhoneAlt } from "react-icons/fa";
+import { useState } from "react";
+import BookingModal from "../../components/booking/BookingModal";
 
 const Doctors = () => {
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [selectedDoctor, setSelectedDoctor] = useState<any | null>(null);
   return (
     <div className="animate-fade-in-up">
       {/* Page Header */}
@@ -23,7 +27,7 @@ const Doctors = () => {
             <input
               type="text"
               placeholder="Search by name, condition, or specialty..."
-              className="flex-grow px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 dark:text-white"
+              className="flex-grow px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-700 placeholder-gray-400 dark:text-white dark:placeholder-slate-400"
             />
             <button className="bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-xl font-bold transition-colors">
               Search
@@ -65,13 +69,15 @@ const Doctors = () => {
                     </div>
                   </div>
 
-                  <button className="cursor-pointer w-full mt-6 bg-sky-50 dark:bg-sky-900/30 hover:bg-sky-600 hover:text-white text-sky-700 dark:text-sky-300 py-3 rounded-xl font-bold transition-all duration-300 border border-sky-100 dark:border-sky-800 hover:border-sky-600">
+                  <button onClick={() => { setSelectedDoctor(doc); setBookingOpen(true); }} className="cursor-pointer w-full mt-6 bg-sky-50 dark:bg-sky-900/30 hover:bg-sky-600 hover:text-white text-sky-700 dark:text-sky-300 py-3 rounded-xl font-bold transition-all duration-300 border border-sky-100 dark:border-sky-800 hover:border-sky-600">
                     Book Appointment
                   </button>
                 </div>
               </div>
             ))}
           </div>
+
+          <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} doctor={selectedDoctor} />
         </div>
       </section>
     </div>

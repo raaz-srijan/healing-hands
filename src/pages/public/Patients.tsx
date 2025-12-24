@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import {
-  FaFileInvoiceDollar,
-  FaNotesMedical,
   FaUserCircle,
+  FaCalendarPlus,
+  FaPhone,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 
 const Patients = () => {
@@ -77,6 +78,37 @@ const Patients = () => {
                   <li>Children under 12 may visit with adult supervision.</li>
                 </ul>
               </div>
+            </div>
+          </div>
+
+          {/* Related Resources */}
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Related Resources</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+              <Link to="/doctors" className="group bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all">
+                <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300 rounded-full flex items-center justify-center text-xl mb-4">
+                  <FaMapMarkerAlt />
+                </div>
+                <h3 className="font-bold text-gray-900 dark:text-white">Find a Doctor</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">Browse specialists and make informed choices.</p>
+              </Link>
+
+              <Link to="/doctors" className="group bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all">
+                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 rounded-full flex items-center justify-center text-xl mb-4">
+                  <FaCalendarPlus />
+                </div>
+                <h3 className="font-bold text-gray-900 dark:text-white">Book Appointment</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">Request appointments with our clinicians.</p>
+              </Link>
+
+              <Link to="/contact" className="group bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all">
+                <div className="w-12 h-12 bg-sky-100 dark:bg-sky-900/40 text-sky-600 dark:text-sky-300 rounded-full flex items-center justify-center text-xl mb-4">
+                  <FaPhone />
+                </div>
+                <h3 className="font-bold text-gray-900 dark:text-white">Contact & Support</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">Call or message for help and directions.</p>
+              </Link>
             </div>
           </div>
         </div>
